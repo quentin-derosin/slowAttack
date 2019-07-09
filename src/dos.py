@@ -6,6 +6,7 @@ import socket
 import logging
 import random
 import time
+import sys
 
 def main():
     arg = parser.parsArg()
@@ -19,4 +20,6 @@ def main():
   
 
 if __name__ == "__main__":
+    logging.basicConfig(stream=sys.stdout,format='%(asctime)s - %(message)s', datefmt='%H:%M:%S', level=logging.INFO)
+    logging.info('Slow Loris Attack Started')
     main()

