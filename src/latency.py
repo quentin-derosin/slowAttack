@@ -1,4 +1,5 @@
 from threading import Thread
+import threading
 import requests
 import time
 
@@ -12,15 +13,16 @@ class Latency(Thread):
         self.url = "http://"+target.host+":"+str(target.port)
 
     def run(self):
-        while True:
-            try:
-                response = requests.get(self.url).elapsed.total_seconds()s -
-                self.latency_list.append(response)
-                print("Latency : {}".format(response))
-                time.sleep(20)
-            except (KeyboardInterrupt, SystemExit):
-                self.latency_avg = sum(self.latency_list) / len(self.latency_list)
-                print("Average latency = {}".format(self.latency_list))
-                break
+        # try:
+        response = requests.get(self.url).elapsed.total_seconds()
+        self.latency_list.append(response)
+        print("Latency : {}".format(response))
+            # time.sleep(20)
 
-    
+        # except (KeyboardInterrupt, SystemExit):
+            # self.latency_avg = sum(self.latency_list) / len(self.latency_list)
+            # print("Average latency = {}".format(self.latency_list))
+            
+    def get_average(self):
+        self.latency_avg = sum(self.latency_list) / len(self.latency_list)
+        return self.latency_avg

