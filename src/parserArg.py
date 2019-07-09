@@ -11,6 +11,7 @@ def initParser():
     parser.add_argument("-a","--addr",type=str,help="Host to perform attack, default localhost",)
     parser.add_argument("-p","--port",default=80,type=int,help="Port of the server, default = 8080")
     parser.add_argument("-s","--sockets",default=1000,help="Max socket use",type=int)
+    parser.add_argument("-d", "--debug", dest="debug", action="store_true", help="Debug log")
 def parsArg():
     initParser()
     if len(sys.argv) <= 1:
