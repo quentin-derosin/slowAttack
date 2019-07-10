@@ -53,6 +53,11 @@ Content-Type: text/html; charset=iso-8859-1
 
 
 ## 3. Difficultees rencontrees
+La principale difficultees fut d'ordre materiel, en essayant l'attaque sur un serveur distant, la box internet ma "banni", il etait impossible d'acceder a aucun site web en dehors, impossible d'utiliser un dns.
+
+La seconde difficultee fut de comprendre que les serveur nodes n'etaient pas affectees. Le programme semblait fonctionel mais aucun ralentissement ne fut observé. Ensuite installer un serveur apache est un defi de taille.
+
+Hormis cela, aucune difficultée majeures ne fut rencontrées.
 
 
 ## 4. Ameliorations
