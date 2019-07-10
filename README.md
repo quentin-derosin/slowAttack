@@ -4,6 +4,7 @@
   - ### [3. Resultat](#2-Resultat)
   - ### [4. Difficultees rencontrees](#4-Difficultees-rencontrees)
   - ### [5. Ameliorations](#5-Ameliorations)
+  - ### [6. Conclustion](#6-Conclusion)
 
 ---
 ## 1. Introduction
@@ -131,7 +132,7 @@ Apres 10 minutes, on stop le programme, on peut donc voir une latence moyenne de
 
 
 ## 4. Difficultees rencontrees
->>>>>>> af15164cda4414bab75d5bcb824c3f22d9e2364d
+
 La principale difficultees fut d'ordre materiel, en essayant l'attaque sur un serveur distant, la box internet ma "banni", il etait impossible d'acceder a aucun site web en dehors, impossible d'utiliser un dns.
 
 La seconde difficultee fut de comprendre que les serveur nodes n'etaient pas affectees. Le programme semblait fonctionel mais aucun ralentissement ne fut observé. Ensuite installer un serveur apache est un defi de taille.
@@ -140,9 +141,12 @@ Hormis cela, aucune difficultée majeures ne fut rencontrées.
 
 
 ## 5. Ameliorations
->>>>>>> af15164cda4414bab75d5bcb824c3f22d9e2364d
 Les améliorations possibles sont nombreuses:
 - Détection automatique du serveur et optimisation des paramètres.
 - Détection automatique du timeout serveur pour les requêtes.
 - Détection du nombre de connection maximum du serveur pour pouvoir choisir le niveau de ddos que l'on veut (un peu, beaucoup, moyen)
 - Utilisation de proxy pour permettre d'ouvrir un plus grand nombre de connections quand il y a un nombre limité par utilisateur.
+
+## 6. Conclusion
+>L'attaque du slowloris est une attaque très intéressante si jamais le serveur web est vulnérable à cette attaque car elle permet à un seul ordinateur de facilement ddos un serveur.
+Cependant il s'avère qui est facile de se protéger face à ses attaques en implémentant quelques règles: nombres de socket par utilisateur limités, firewall, reverse proxy, etc.
