@@ -39,6 +39,12 @@ Afin de faire fonctionner ce programme, il est necessaire d'installer certaines 
  * `source env/bin/activate`
  * `pip install -r requirements.txt`
 
+ Ensuite il est possible de choisir certaines options:
+ - a: Host to perform attack on, default localhost
+ - p: Port of the server, default = 80
+ - s: Max socket to use
+ - d: Debug mode
+
 
  Dans un premier temps, il est necessaire de recuperer le type de serveur que l'on souhaite attaquer : 
  * Par exemple, un serveur apache 1.x/2.x permettra une attaque optimal.
@@ -84,9 +90,11 @@ Il va ensuite essayer à nouveau d'ouvrir des connections jusqu'à atteindre la 
 Par la suite le slowloris va calculer la latence en faisant une requête dans un thread à part.
 
 ```Python
-if not latence.is_alive():
-    latence.run()
+response = requests.get(self.url).elapsed.total_seconds()
 ```
+La request fait un get sur l'host rentree par l'utilisateur et recupere le temps entre l'envoie et la reponse de la requete.
+
+
 ---
 
 ## 3. Resultat
@@ -122,12 +130,8 @@ Apres 10 minutes, on stop le programme, on peut donc voir une latence moyenne de
 ---
 
 
-
-
-
-
-
 ## 4. Difficultees rencontrees
+>>>>>>> af15164cda4414bab75d5bcb824c3f22d9e2364d
 La principale difficultees fut d'ordre materiel, en essayant l'attaque sur un serveur distant, la box internet ma "banni", il etait impossible d'acceder a aucun site web en dehors, impossible d'utiliser un dns.
 
 La seconde difficultee fut de comprendre que les serveur nodes n'etaient pas affectees. Le programme semblait fonctionel mais aucun ralentissement ne fut observé. Ensuite installer un serveur apache est un defi de taille.
@@ -136,6 +140,7 @@ Hormis cela, aucune difficultée majeures ne fut rencontrées.
 
 
 ## 5. Ameliorations
+>>>>>>> af15164cda4414bab75d5bcb824c3f22d9e2364d
 Les améliorations possibles sont nombreuses:
 - Détection automatique du serveur et optimisation des paramètres.
 - Détection automatique du timeout serveur pour les requêtes.
