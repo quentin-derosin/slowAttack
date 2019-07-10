@@ -42,7 +42,7 @@ class Connection:
         s.connect((self.target_info.host, self.target_info.port))
 
         s.send("GET /?{} HTTP/1.1\r\n".format(random.randint(0, 2000)).encode("utf-8"))
-        s.send("User-Agent: {}\r\n".format(ua.USER_AGENTS[0]).encode("utf-8"))
+        s.send("User-Agent: {}\r\n".format(ua.USER_AGENTS[randint(0,29)]).enode("utf-8"))
         s.send("{}\r\n".format("Accept-language: en-US,en,q=0.5").encode("utf-8"))
         return s
 
