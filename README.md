@@ -97,7 +97,7 @@ response = requests.get(self.url).elapsed.total_seconds()
 
 
 
-## 3. Difficultees rencontrees
+## 3. Difficultées rencontrées
 La principale difficultees fut d'ordre materiel, en essayant l'attaque sur un serveur distant, la box internet ma "banni", il etait impossible d'acceder a aucun site web en dehors, impossible d'utiliser un dns.
 
 La seconde difficultee fut de comprendre que les serveur nodes n'etaient pas affectees. Le programme semblait fonctionel mais aucun ralentissement ne fut observé. Ensuite installer un serveur apache est un defi de taille.
@@ -105,7 +105,7 @@ La seconde difficultee fut de comprendre que les serveur nodes n'etaient pas aff
 Hormis cela, aucune difficultée majeures ne fut rencontrées.
 
 
-## 4. Ameliorations
+## 4. Améliorations
 Les améliorations possibles sont nombreuses:
 - Détection automatique du serveur et optimisation des paramètres.
 - Détection automatique du timeout serveur pour les requêtes.
