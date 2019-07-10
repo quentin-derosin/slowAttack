@@ -35,6 +35,13 @@ Afin de faire fonctionner ce programme, il est necessaire d'installer certaines 
  * `source env/bin/activate`
  * `pip install -r requirements.txt`
 
+ Ensuite il est possible de choisir certaines options:
+ - a: Host to perform attack on, default localhost
+ - p: Port of the server, default = 80
+ - s: Max socket to use
+ - d: Debug mode
+
+
  Dans un premier temps, il est necessaire de recuperer le type de serveur que l'on souhaite attaquer : 
  * Par exemple, un serveur apache 1.x/2.x permettra une attaque optimal.
  * A contrario, attaquer un WebServeur tournant avec le framework NodeJS a partir de la version 8 est inutile
