@@ -89,6 +89,9 @@ Par la suite le slowloris va calculer la latence en faisant une requête dans un
 if not latence.is_alive():
     latence.run()
 ```
+```Python
+response = requests.get(self.url).elapsed.total_seconds()
+```
 
 
 
