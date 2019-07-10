@@ -1,9 +1,11 @@
 # Python pour la securite
   - ### [1. Introduction](#1-Introduction)
   - ### [2. Fonctionnement](#2-Fonctionnement)
-  - ### [3. Difficultees rencontrees](#3-Difficultees-rencontrees)
-  - ### [4. Ameliorations](#4-Ameliorations)
+  - ### [3. Resultat](#2-Resultat)
+  - ### [4. Difficultees rencontrees](#4-Difficultees-rencontrees)
+  - ### [5. Ameliorations](#5-Ameliorations)
 
+---
 ## 1. Introduction
 
  L'attaque slow loris permet de faire un ddos sur un serveur en se servant que d'une seule machine. 
@@ -29,11 +31,14 @@ Il existe d'autres méthodes pour se protéger tel qu'installer un:
 - content switches
 
 Si aucune de ces solutions n'est envisageable il est toujours possible de placer son webserver derrière un nginx ou lighthttpd qui ne sont pas affectés par cette attaque.
+
+---
 ## 2. Fonctionnement
 Afin de faire fonctionner ce programme, il est necessaire d'installer certaines dependances. Les commandes a executer pour avoir un environnement d'execution sont les suivantes :
  * `virtualenv env`
  * `source env/bin/activate`
  * `pip install -r requirements.txt`
+
 
  Dans un premier temps, il est necessaire de recuperer le type de serveur que l'on souhaite attaquer : 
  * Par exemple, un serveur apache 1.x/2.x permettra une attaque optimal.
@@ -82,12 +87,47 @@ Par la suite le slowloris va calculer la latence en faisant une requête dans un
 if not latence.is_alive():
     latence.run()
 ```
+---
+
+## 3. Resultat
+Les resultat ci dessous ont ete effectue sur un serveur Apache avec la configuration initiale.</br>
+Le programme fut lance avec la commande suivante : `python src/main.py -a 127.0.0.1 -s 1000`
+
+
+Dans un premier temps la console nous affiche que l'on se trouvre sur un seveur Apache, ce qui est parfait pour notre attaque : 
+> `[127.0.0.1] server running with Apache, best configuartion for this attack`
+
+Dans un second temps, on affiche la latence initial :
+> `[Latency] -- 0.002142`
+
+On remarque donc que le temps de latence est relativement faible. </br></br>
+Ensuite on initialise le maximum de socket 
+> `279 connections 1000 initialised`
+
+On remarque ici que l'on a reussi a initialiser seulement 279 sockets sur les 1000 prevu, on essaie maintenant de les garder ouvertes le plus longtemps possible.
+
+Apres 15 secondes, on essaie d'en recreer afin d'atteindre les 1000
+> `try recreating sockets`
+
+Apres 5 minutes, on peut voir que l'on a 408 sockets qui sont ouvertes
+> ` 408 connections 1000 initialised `
+
+On remarque aussi une latence de 15 secondes, preuve que le deni de service fonctionne.
+> `[Latency] -- 15.80608   `
+
+Apres 10 minutes, on stop le programme, on peut donc voir une latence moyenne de 14.7 secondes.
+> `Average latency = 14.702567199999999`
+
+
+---
 
 
 
 
 
-## 3. Difficultees rencontrees
+
+
+## 4. Difficultees rencontrees
 La principale difficultees fut d'ordre materiel, en essayant l'attaque sur un serveur distant, la box internet ma "banni", il etait impossible d'acceder a aucun site web en dehors, impossible d'utiliser un dns.
 
 La seconde difficultee fut de comprendre que les serveur nodes n'etaient pas affectees. Le programme semblait fonctionel mais aucun ralentissement ne fut observé. Ensuite installer un serveur apache est un defi de taille.
@@ -95,7 +135,7 @@ La seconde difficultee fut de comprendre que les serveur nodes n'etaient pas aff
 Hormis cela, aucune difficultée majeures ne fut rencontrées.
 
 
-## 4. Ameliorations
+## 5. Ameliorations
 Les améliorations possibles sont nombreuses:
 - Détection automatique du serveur et optimisation des paramètres.
 - Détection automatique du timeout serveur pour les requêtes.
