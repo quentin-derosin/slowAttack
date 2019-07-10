@@ -39,7 +39,17 @@ Si aucune de ces solutions n'est envisageable il est toujours possible de placer
 > * Par exemple, un serveur apache 1.x/2.x permettra une attaque optimal.
 > * A contrario, attaquer un WebServeur tournant avec le framework NodeJS a partir de la version 8 est inutile
 
->
+> Pour recuper le type de serveur, on envoie une requete get : </br> 
+>> `sock.send("GET / HTTP/1.1\r\n\r\n".encode("ascii"))`</br>
+
+>  Puis on analyse le retour </br>
+>> `HTTP/1.1 400 Bad Request
+Date: Wed, 10 Jul 2019 16:18:53 GMT
+Server: Apache/2.4.29 (Ubuntu)
+Content-Length: 301
+Connection: close
+Content-Type: text/html; charset=iso-8859-1
+`
 
 
 ## 3. Difficultees rencontrees
