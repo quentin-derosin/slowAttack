@@ -42,8 +42,9 @@ class Connection:
         s.connect((self.target_info.host, self.target_info.port))
 
         s.send("GET /?{} HTTP/1.1\r\n".format(random.randint(0, 2000)).encode("utf-8"))
-        s.send("User-Agent: {}\r\n".format(ua.USER_AGENTS[random.randint(0,29)]).enode("utf-8"))
+        s.send("User-Agent: {}\r\n".format(ua.USER_AGENTS[random.randint(0,29)]).encode("utf-8"))
         s.send("{}\r\n".format("Accept-language: en-US,en,q=0.5").encode("utf-8"))
+        self.log.debug(s)
         return s
 
     def test_initial_latency(self,latence):
@@ -62,6 +63,7 @@ class Connection:
                 self.log.warning(e)
                 break
             self.sockets_list.append(s)
+            self.log.debug("Added new socket connection")
         self.log.info("{} connections {} initialised".format(len(self.sockets_list),self.target_info.sockets_number))
         while True:
             try:

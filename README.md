@@ -56,3 +56,8 @@ Content-Type: text/html; charset=iso-8859-1
 
 
 ## 4. Ameliorations
+Les améliorations possibles sont nombreuses:
+- Détection automatique du serveur et optimisation des paramètres.
+- Détection automatique du timeout serveur pour les requêtes.
+- Détection du nombre de connection maximum du serveur pour pouvoir choisir le niveau de ddos que l'on veut (un peu, beaucoup, moyen)
+- Utilisation de proxy pour permettre d'ouvrir un plus grand nombre de connections quand il y a un nombre limité par utilisateur.
