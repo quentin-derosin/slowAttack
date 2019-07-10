@@ -130,6 +130,17 @@ Apres 10 minutes, on stop le programme, on peut donc voir une latence moyenne de
 
 ---
 
+[Just a moment...](https://cdn1.imggmi.com/uploads/2019/7/10/cca68682fe9aa44435fa77cb9439f596-full.png)
+On peut voir en haut le spinner qui tourne et en bas la requête connexion
+
+Egalement quand on essaie de lancer un autre slowloris sur le même serveur alors qu'il y a déjà un slowloris qui tourne celui-ci ne marche pas car il n'arrive pas à établir une nouvelle connection.
+
+```Bash
+(env) ➜  slowAttack git:(master) ✗ python src/main.py -a 127.0.0.1
+19:30:51 - Slow Loris Attack Started
+19:30:54 - No Webserver detected, please verify your target adresse
+```
+
 
 ## 4. Difficultees rencontrees
 
